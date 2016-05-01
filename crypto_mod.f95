@@ -1,6 +1,10 @@
-module crypto_mod
-    use intrinsic ISO_FORTRAN_ENV
+module crypto
+    use intrinsic :: iso_fortran_env
     implicit none
+
+    private
+
+    public :: SHA1
 
     contains
         function SHA1(string)
@@ -9,7 +13,7 @@ module crypto_mod
             integer(int32) :: h0, h1, h2, h3, h4, w(80), a, b, c, d, e, f, k, temp
             integer(int64) :: s1
             integer(int8), dimension(:), allocatable :: ipadded
-            integer :: i, j, n, l
+            integer :: i, j
 
             s1 = len_trim(string)
 
@@ -97,4 +101,4 @@ module crypto_mod
         bytearray_reverse = a(size(a):1:-1)
     end function bytearray_reverse
 
-end module crypto_mod
+end module crypto
