@@ -131,5 +131,29 @@ contains
         end if
     end function hashtable_get
 
+    subroutine hashtable_dispose(this)
+        class(hashtable), target :: this
+        integer :: i
+        type(hashnode, pointer :: node
 
+        if (allocated(this%table)) then
+            do i = 1, size(this%table)
+                node => this%table(i)
+                call hashnode_clear(node)
+            end do
+            deallocate(this%table)
+            this%entrycounter = 0
+        end if
+    end subroutine hashtable_dispose(this)
 
+    recursive subroutine hashnode_clear(this)
+        type(hashnode), pointer :: this
+
+        if (associated(this%next)) then
+            call hashnode_clear(this%next)
+            deallocate(this%next)
+            nullify(this%next)
+        end if
+
+    end subroutine hashnode_clear
+end module hashtable
