@@ -72,3 +72,36 @@ contains
         end if
     end subroutine dynamicresize
 
+    subroutine hashtable_put(this, key, value)
+        class(hashtable), target :: this
+        character(len=*) :: key, value
+        integer :: index
+        type(hashnode), pointer :: node
+
+        if (len(key) > valuesize) print *, '!!! Key, ', key, ', is longer than storage size. Might cause overflow. (', valuesize, ').'
+        if (len(key) > valuesize) print *, '!!! Value, ', value, ', is longer than storage size. Might cause overflow. (', valuesize, ').'
+
+        index = mod(hash(key), size(this%table))
+        if (this%table(index)%key == '' .or. this%table(index)%key == key) then
+            this%table(index)%key = key
+            this%table(index)%value = value
+        else
+            node => this%table(index)
+            do while (associated(node%next) .and. node%key /= key)
+                node => node%next
+            end do
+            if (node %key == key) then
+                node%key = key
+                node%value = value
+            else
+                allocate(node%next)
+                node => node%next
+                node%key = key
+                node%value = value
+                nullify(node%next)
+            end if
+        end if
+        this%entrycount = this%entrycounter + 1
+        call dynamicresize(this)
+    end subroutine hashtable_put
+
