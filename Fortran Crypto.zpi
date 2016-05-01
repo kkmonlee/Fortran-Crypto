@@ -94,6 +94,7 @@
     <Folder name="Header Files" sorted="Yes" />
     <Folder name="Resource Files" sorted="Yes" />
     <Folder name="Source Files" sorted="Yes">
+        <File>crypto_mod.f95</File>
         <File>hashtable.f95</File>
     </Folder>
 </Project>
