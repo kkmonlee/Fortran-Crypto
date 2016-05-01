@@ -105,3 +105,31 @@ contains
         call dynamicresize(this)
     end subroutine hashtable_put
 
+    function hashtable_get(this, key)
+        class(hashtable), target :: this
+        character(len=*) :: key
+        character(len=:), allocatable :: hashtable_get
+        integer :: index
+        type(hashnode), pointer :: node
+
+        if (len(key) > valuesize) print *, 'Key, ', key, ', is longer than storage size (', valuesize, ').'
+
+        index = mod(hash(key), size(this%table))
+        if (.not.associated(this%table(index)%next)) then
+            hashtable_get = trim(this%table(index)%value)
+        else
+            node => this%table(index)
+            do while (node%key /= key .and. associated(node%next))
+                node => node%next
+            end do
+            if (node%key == key) then
+                hashtable_get = trim(node%value)
+            else
+                print *, '!!! Unable to find key: ', key
+                stop
+            end if
+        end if
+    end function hashtable_get
+
+
+
