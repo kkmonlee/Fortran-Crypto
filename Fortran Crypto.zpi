@@ -96,5 +96,6 @@
     <Folder name="Source Files" sorted="Yes">
         <File>crypto_mod.f95</File>
         <File>hashtable.f95</File>
+        <File>test.f95</File>
     </Folder>
 </Project>

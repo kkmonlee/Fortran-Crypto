@@ -39,7 +39,7 @@ contains
     function hash(key)
         character(len=*) :: key
         integer :: hash
-        character*20 :: fullhash
+        character(len=40) :: fullhash
 
         fullhash = SHA1(key)
         hash = ibclr(transfer(fullhash(1:4), hash), bit_size(hash) - 1)

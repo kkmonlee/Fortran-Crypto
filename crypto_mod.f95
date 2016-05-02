@@ -9,7 +9,7 @@ module crypto
     contains
         function SHA1(string)
             character(len=*) :: string
-            character(len=20) :: SHA1
+            character(len=40) :: SHA1
             integer(int32) :: h0, h1, h2, h3, h4, w(80), a, b, c, d, e, f, k, temp
             integer(int64) :: s1
             integer(int8), dimension(:), allocatable :: ipadded
@@ -75,11 +75,11 @@ module crypto
 
             deallocate(ipadded)
 
-            SHA1(1:4) = transfer(int32_reversebytes(h0), SHA1(1:4))
-            SHA1(5:8) = transfer(int32_reversebytes(h1), SHA1(5:8))
-            SHA1(9:12) = transfer(int32_reversebytes(h2), SHA1(9:12))
-            SHA1(13:16) = transfer(int32_reversebytes(h3), SHA1(13:16))
-            SHA1(17:20) = transfer(int32_reversebytes(h4), SHA1(17:20))
+            write(SHA1(1:8), "(Z8.8)") int32_reversebytes(h0)
+            write(SHA1(9:16), "(Z8.8)") int32_reversebytes(h1)
+            write(SHA1(17:24), "(Z8.8)") int32_reversebytes(h2)
+            write(SHA1(25:32), "(Z8.8)") int32_reversebytes(h3)
+            write(SHA1(33:40), "(Z8.8)") int32_reversebytes(h4)
 
     end function SHA1
 
