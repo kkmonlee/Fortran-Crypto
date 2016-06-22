@@ -1,4 +1,4 @@
-module primes
+module primes_module
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -141,4 +141,4 @@ module primes
             p = randomPrime_int32(min, max)
         end if
     end function
-end module
+end module primes_module
