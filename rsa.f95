@@ -1,6 +1,6 @@
-module rsa
+module rsa_module
     use, intrinsic :: iso_fortran_env
-    use primes
+    use primes_module
     implicit none
     private
 
@@ -59,4 +59,4 @@ module rsa
 
         rsaEncrypt = message
     end function
-end module
+end module rsa_module

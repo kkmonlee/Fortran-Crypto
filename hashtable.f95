@@ -1,6 +1,6 @@
-module hashtable
-    use crypto_mod, only: SHA1
-    use sha1
+module hashtable_module
+!     use crypto_mod, only: SHA1
+    use sha1_module
     implicit none
     private
 
@@ -295,4 +295,4 @@ contains
         end if
         if (allocated(this%value)) deallocate(this%value)
     end subroutine hashnode_clear
-end module hashtable
+end module hashtable_module

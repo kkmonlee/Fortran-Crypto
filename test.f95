@@ -1,12 +1,13 @@
-program fortran-crypto
-    use, instrinsic :: iso_fortran_end
-    use primes
-    use sha1
-    use rsa
+program fortran_crypto
+    use, intrinsic :: iso_fortran_env
+    use primes_module
+    use sha1_module
+    use rsa_module
+    use hashtable_module
     implicit none
 
-    print *, "isPrime(567)"
-    print *, isPrime(567_int8)
+    print *, "isPrime(127)"
+    print *, isPrime(127_int8) ! max for int8
 
     print *, "primesUpTo(1024)"
     print *, primesUpTo(1024_int32)
@@ -24,4 +25,4 @@ program fortran-crypto
     print *, SHA1(2300_int64)
 
     print *, rsaGenerateKeys()
-end program fortran-crypto
+end program fortran_crypto

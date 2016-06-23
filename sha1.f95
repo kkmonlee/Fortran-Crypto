@@ -1,4 +1,4 @@
-module sha1
+module sha1_module
     use, intrinsic :: iso_fortran_env
     implicit none
     private
@@ -196,4 +196,4 @@ module sha1
         write(SHA1Hash(25:32), "(Z8.8)") h3
         write(SHA1Hash(33:40), "(Z8.8)") h4
     end function SHA1Hash
-end module
+end module sha1_module
